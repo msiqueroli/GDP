@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body id="bodyLogin">
+	<f:metadata>	
+		<f:viewParam name="dummy" />
+		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+	</f:metadata>
+	
+	<div id="divLogin">
+		<p:growl id="growl" sticky="true" prependId="false" />
+		<h:form id="formLogin" prependId="false">
+			<h:graphicImage library="imagens" name="LOGO.png" width="260"
+				style="margin-bottom: -7px; margin-left: 30px;" />
+			<h:panelGrid styleClass="panelGridCenter" cellpadding="7">
+				<p:separator style="border-color: #CFD8DC;" />
+				<p:inputText id="j_username" placeholder="Usuário" size="35"
+					styleClass="inputLogin" value="#{loginBean.email}" />
+				<p:password id="j_password" placeholder="Senha" size="35"
+					styleClass="inputLogin" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" styleClass="panelGridCenter">
+				<p:link value="Esqueceu a senha?" style="color: #ECEFF1;" />
+				<p:commandButton value="Entrar" icon="ui-icon-unlocked"
+					styleClass="buttonLogin" action="#{loginBean.login}" ajax="false" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>

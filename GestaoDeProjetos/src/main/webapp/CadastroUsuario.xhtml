@@ -1,0 +1,186 @@
+<ui:composition template="WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:event listener="#{cadastroUsuarioBean.inicializar}"
+			type="preRenderView" />
+	</f:metadata>
+	
+	<h:head>
+	<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+	
+	<ui:define name="corpo">
+		<h:form id="formTabela">
+
+			<style type="text/css">
+.ui-growl {
+	right: 20px;
+	top: 10%;
+}
+
+.ui-dialog {
+	position: fixed;
+	top: 10%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -100px;
+}
+</style>
+
+
+			<p:panel header="Usuários" style="margin-bottom:20px">
+
+				<p:dataTable id="dtUsuario" editable="true" var="usuario"
+					value="#{cadastroUsuarioBean.usuarios}" paginator="true" rows="10">
+
+					<p:ajax event="rowEdit" listener="#{cadastroUsuarioBean.onRowEdit}"
+						update="dtUsuario" />
+
+					<p:ajax event="rowEditCancel"
+						listener="#{cadastroUsuarioBean.onRowCancel}" update="dtUsuario" />
+
+					<p:column headerText="Login" filterBy="#{usuario.loginUsuario}">
+
+						<p:cellEditor>
+
+							<f:facet name="output">
+								<h:outputText value="#{usuario.loginUsuario}" />
+							</f:facet>
+
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{usuario.loginUsuario}"
+									style="width:100%" />
+							</f:facet>
+
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Nome">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{usuario.nomeUsuario}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput1" value="#{usuario.nomeUsuario}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="E-mail">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{usuario.emailUsuario}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput2" value="#{usuario.emailUsuario}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Cargo">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{usuario.tipoUsuario}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{usuario.tipoUsuario}"
+									style="width:100%">
+									<f:selectItems value="#{cadastroUsuarioBean.cargos}"
+										var="cargos" itemLabel="#{cargos}" itemValue="#{cargos}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Senha">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="******" />
+							</f:facet>
+							<f:facet name="input">
+								<p:password id="modelInput4" value="#{usuario.senhaUsuario}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
+					</p:column>
+
+				</p:dataTable>
+				<p:commandButton value="Salvar" styleClass="buttonGreen"
+					oncomplete="PF('cadastroUsuario').show()" />
+			</p:panel>
+		</h:form>
+
+
+
+		<p:dialog widgetVar="cadastroUsuario" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false" width="950"
+			style="margin-left: 250px;" position="center">
+			<h:form id="formCadastro">
+				<p:growl id="growl" sticky="true" prependId="false"/>
+				<p:panel header="Cadastro de Usuário" style="margin-bottom:20px;" id="panelCadastro">
+					<p:panelGrid columns="2" id="painel"
+						style="margin-top:10px; width: 80%;">
+
+						<p:outputLabel value="Nome:" for="inputNome" />
+						<p:inputText size="20" value="#{cadastroUsuarioBean.nome}"
+							required="true" id="inputNome" label="Nome"/>
+
+						<p:outputLabel value="Login:" for="inputLogin" />
+						<p:inputText size="20" value="#{cadastroUsuarioBean.login}"
+							required="true" id="inputLogin" />
+
+						<p:outputLabel value="Email:" for="inputEmail" />
+						<p:inputText size="20" value="#{cadastroUsuarioBean.email}"
+							required="true" id="inputEmail" />
+
+						<p:outputLabel value="Cargo:" for="console" />
+						<h:selectOneMenu id="console" styleClass="btn-lg dropdown-toggle"
+							style="width:205px" value="#{cadastroUsuarioBean.cargo}"
+							required="true">
+							<f:selectItem itemLabel="Selecione o cargo" itemValue="" />
+							<f:selectItem itemLabel="Gerente" itemValue="Gerente" />
+							<f:selectItem itemLabel="Desenvolvedor" itemValue="Desenvolvedor" />
+							<f:selectItem itemLabel="Product Owner" itemValue="Produc Owner" />
+						</h:selectOneMenu>
+
+
+						<p:outputLabel value="Senha:" for="inputSenha" />
+						<p:password id="inputSenha" feedback="true"
+							value="#{cadastroUsuarioBean.senha}" label="Senha"
+							match="inputRepitaSenha" required="true"
+							promptLabel="Entre com sua senha" weakLabel="Senha fraca"
+							goodLabel="Senha boa" strongLabel="Senha forte"
+							validatorMessage="As senhas não coicidem." />
+						<p:outputLabel value="Repita a senha:" for="inputRepitaSenha" />
+						<p:password size="20" value="#{cadastroUsuarioBean.senha}"
+							id="inputRepitaSenha" label="Repit	a a senha" required="true" />
+
+					</p:panelGrid>
+
+					<p:commandButton value="Salvar"
+						styleClass="btn btn-success btn-flat" style="margin-top:20px"
+						actionListener="#{cadastroUsuarioBean.salvar}" update="formCadastro growl" onblur="form">
+					</p:commandButton>
+
+					<h:button value="Limpar" class="btn btn-danger btn-flat"
+						style="margin-top:20px; margin-left:20px;" />
+				</p:panel>
+
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+

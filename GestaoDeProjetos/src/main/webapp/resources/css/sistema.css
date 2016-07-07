@@ -1,0 +1,114 @@
+#bodyLogin {
+    background: #37474f no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#divLogin { 
+    width: 450px;
+    margin: auto;
+    margin-top: 75px;
+}
+
+#formLogin {
+    background: #263238;
+    border-radius: 15px;
+    border: 2px solid #CFD8DC;
+    margin-top: 8px;
+    padding: 10px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+
+h1{
+    font-style: normal;
+    font-family: initial;
+    font-size: 36px;
+    padding: 0px;
+    margin: 0px;
+    color: #263238;
+    pointer-events: none;
+}
+
+.panelGridCenter {
+    margin: 0 auto;
+}
+
+.panelGridCenter2 {
+    margin: 0 auto;
+}
+
+.buttonLogin{
+    background-color: #42A5F5;
+    margin-left: 95px;
+    border-radius: 5px;
+    color: white;
+    
+    outline: none;
+    border:none;
+    text-shadow:none;
+    box-shadow: none;
+    background-image : none;   
+}
+
+.buttonLogin:hover{
+    background-color: #CFD8DC;
+    box-shadow: none;
+    color: #263238;
+}
+
+.buttonLogin:active{
+    border:none;
+    background-color: #42A5F5;
+    color: white;
+    box-shadow: none;
+    outline: none;
+}
+
+.inputLogin{
+    border: 1px solid #B0BEC5;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    outline: none;
+    background-image : none;
+    background-color: #ECEFF1;
+    text-shadow:none;
+}
+
+.inputLogin:hover{
+    outline: none;
+    border: 1px solid #37474F;
+    background-color: white;
+}
+
+.inputLogin:focus{
+    outline: none;
+    border: 1px solid #37474F;
+    background-color: white;
+}
+
+.panelGridCadastro td {
+     border-style: hidden !important;
+}
+
+.buttonGreen{
+    background-color: #42A5F5;
+    margin-left: 95px;
+    border-radius: 5px;
+    color: white;
+    
+    outline: none;
+    border:none;
+    text-shadow:none;
+    box-shadow: none;
+    background-image : none;   
+}
+
+.
+
+::-webkit-input-placeholder  { color:#607D8B; }
